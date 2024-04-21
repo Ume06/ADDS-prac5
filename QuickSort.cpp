@@ -6,16 +6,8 @@ std::vector<int> QuickSort::sort(std::vector<int> list) {
   return list;
 }
 
-void printList(std::vector<int> list) {
-  for (int i = 0; i < list.size(); i++) {
-    std::cout << list[i] << " ";
-  }
-  std::cout << std::endl;
-}
-
 void QuickSort::quickSort(std::vector<int> &list, int left, int right) {
   if (left < right) {
-        printList(list);
         // Partition the array and get pivot index
         int pivot_index = partition(list, left, right);
         
@@ -33,8 +25,6 @@ int QuickSort::partition(std::vector<int> &list, int left, int right) {
         pivot_index = right;
     }
     int pivot = list[pivot_index];
-    int left = left;
-    int right = right;
 
     while (left <= right) {
         // Move left pointer to the right

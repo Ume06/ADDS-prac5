@@ -1,25 +1,36 @@
 #include <vector>
 #include <iostream>
+#include <sstream>
+#include <iterator>
 #include "QuickSort.h"
-#include "BubbleSort.h"
+#include "RecursiveBinarySearch.h"
 
 void print(std::vector<int> list) {
-  for (int i = 0; i < list.size(); i++) {
+  for (size_t i = 0; i < list.size() - 1; i++) {
     std::cout << list[i] << " ";
   }
-  std::cout << std::endl;
+  std::cout << list[list.size() - 1];
+}
+
+std::vector<int> getSpaceSeparatedInput() {
+  std::string line;
+  std::getline(std::cin, line);
+
+  std::istringstream iss(line);
+  std::vector<int> values(std::istream_iterator<int>{iss},
+                         std::istream_iterator<int>{});
+
+  return values;
 }
 
 int main() {
   QuickSort qs;
-  BubbleSort bs;
-  std::vector<int> unsorted = {5, 2, 4, 6, 1, 3};
-  std::vector<int> bs_sorted = bs.sort(unsorted);
+  RecursiveBinarySearch rb;
+  std::vector<int> unsorted = getSpaceSeparatedInput();
   std::vector<int> qs_sorted = qs.sort(unsorted);
-
-  print(unsorted);
-  print(bs_sorted);
+  int target = 1;
+  int result = rb.search(qs_sorted, target);
+  std::cout << result << " ";
   print(qs_sorted);
-
   return 0;
 }
