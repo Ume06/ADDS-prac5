@@ -2,27 +2,58 @@
 #include <iostream>
 
 std::vector<int> QuickSort::sort(std::vector<int> list) {
-  if (list.size() <= 2)
-    return list;
-
-  int pivot = 2;
-  int slow_ptr = -1, fast_ptr = 0;
-
-  for (fast_ptr; fast_ptr < pivot; fast_ptr++) {
-    if (list[fast_ptr] < list[pivot]) {
-      slow_ptr++;
-      std::swap(list[slow_ptr], list[fast_ptr]);
-    }
-  }
-
-  std::swap(list[slow_ptr + 1], list[pivot]);
-
-  // sort before pivot
-
-  // sort after pivot
+  quickSort(list, 0, list.size() - 1);
   return list;
 }
 
+void printList(std::vector<int> list) {
+  for (int i = 0; i < list.size(); i++) {
+    std::cout << list[i] << " ";
+  }
+  std::cout << std::endl;
+}
+
 void QuickSort::quickSort(std::vector<int> &list, int left, int right) {
-  
+  if (left < right) {
+        printList(list);
+        // Partition the array and get pivot index
+        int pivot_index = partition(list, left, right);
+        
+        // Recursively sort the two sub-arrays
+        quickSort(list, left, pivot_index);
+        quickSort(list, pivot_index + 1, right);
+    }
+}
+
+int QuickSort::partition(std::vector<int> &list, int left, int right) {
+    int pivot_index;
+    if (right - left + 1 >= 3) {
+        pivot_index = left + 2;
+    } else {
+        pivot_index = right;
+    }
+    int pivot = list[pivot_index];
+    int left = left;
+    int right = right;
+
+    while (left <= right) {
+        // Move left pointer to the right
+        while (list[left] < pivot) {
+            left++;
+        }
+        // Move right pointer to the left
+        while (list[right] > pivot) {
+            right--;
+        }
+        
+        if (left <= right) {
+            // Swap elements at left and right pointers
+            std::swap(list[left], list[right]);
+            left++;
+            right--;
+        }
+    }
+
+    // After the loop, right is the last position of the smaller or equal element
+    return right;
 }
