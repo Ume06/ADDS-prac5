@@ -11,7 +11,7 @@ bool RecursiveBinarySearch::search(std::vector<int> list, int target) {
 //assume list is sorted
 int RecursiveBinarySearch::binarySearch(std::vector<int> list, int left, int right, int target) {
   if (right - left < 1)
-    return -1; 
+    return list[left] == target ? left : -1; 
   int middle = (left + right) / 2;
   if (list[middle] == target)
     return middle;
