@@ -29,8 +29,8 @@ int main() {
   std::vector<int> unsorted = getSpaceSeparatedInput();
   std::vector<int> qs_sorted = qs.sort(unsorted);
   int target = 1;
-  int result = rb.search(qs_sorted, target);
-  std::cout << result << " ";
+  bool result = rb.search(qs_sorted, target);
+  std::cout << std::boolalpha << result << " ";
   print(qs_sorted);
   return 0;
 }
